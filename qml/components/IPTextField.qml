@@ -18,7 +18,7 @@ Column {
     property bool valid: byte1 >= 0 && byte1 <= 255 && byte2 >= 0 && byte2 <= 255 && byte3 >= 0 && byte3 <= 255 && byte4 >= 0 && byte4 <= 255 && mask >= 0 && mask <= 32
     property string ipaddress: byte1 + '.' + byte2 + '.' + byte3 + '.' + byte4 + '/' + mask
     property bool editable: true
-    property var fieldSize: Theme.fontSizeMedium
+    property var fontSize: Theme.fontSizeMedium
     property var acceptFunction: null
 
     function clear() {
@@ -37,6 +37,9 @@ Column {
                 tmpMask -= 8
                 if (byte2 === 0) {
                     tmpMask -= 8
+                    if (byte1 === 0) {
+                        tmpMask = 0
+                    }
                 }
                 else if (byte2 === 16 && byte1 === 172) {
                     tmpMask = 12
@@ -46,10 +49,6 @@ Column {
         mask = tmpMask
     }
 
-    //add: Transition {
-    //    FadeAnimator {}
-    //}
-
     Row {
         anchors.horizontalCenter: parent.horizontalCenter
         spacing: -Theme.paddingSmall
@@ -57,7 +56,8 @@ Column {
             id: networkByte1
             labelVisible: false
             readOnly: !editable
-            font.pixelSize: fieldSize
+            width: implicitWidth > Theme.itemSizeSmall ? implicitWidth : Theme.itemSizeSmall
+            font.pixelSize: fontSize
             placeholderText: "0"
             inputMethodHints: Qt.ImhDigitsOnly
             EnterKey.enabled: acceptableInput
@@ -72,16 +72,18 @@ Column {
                     text = Number(text.split(',')[0])
                     networkByte2.focus = true
                 }
-                text = byte1 = Number(text)
+                text = text === "" ? "" : Number(text)
                 if (text == "NaN") text = ""
+                byte1 = Number(text)
             }
         }
-        Label { text: "."; anchors.verticalCenter: parent.verticalCenter }
+        Label { text: "."; anchors.bottom: parent.bottom }
         TextField {
             id: networkByte2
             labelVisible: false
             readOnly: !editable
-            font.pixelSize: fieldSize
+            width: implicitWidth > Theme.itemSizeSmall ? implicitWidth : Theme.itemSizeSmall
+            font.pixelSize: fontSize
             placeholderText: "0"
             inputMethodHints: Qt.ImhDigitsOnly
             EnterKey.enabled: acceptableInput
@@ -96,16 +98,18 @@ Column {
                     text = Number(text.split(',')[0])
                     networkByte3.focus = true
                 }
-                text = byte2 = Number(text)
+                text = text === "" ? "" : Number(text)
                 if (text == "NaN") text = ""
+                byte2 = Number(text)
             }
         }
-        Label { text: "."; anchors.verticalCenter: parent.verticalCenter }
+        Label { text: "."; anchors.bottom: parent.bottom }
         TextField {
             id: networkByte3
             labelVisible: false
             readOnly: !editable
-            font.pixelSize: fieldSize
+            width: implicitWidth > Theme.itemSizeSmall ? implicitWidth : Theme.itemSizeSmall
+            font.pixelSize: fontSize
             placeholderText: "0"
             inputMethodHints: Qt.ImhDigitsOnly
             EnterKey.enabled: acceptableInput
@@ -120,21 +124,24 @@ Column {
                     text = Number(text.split(',')[0])
                     networkByte4.focus = true
                 }
-                text = byte3 = Number(text)
+                text = text === "" ? "" : Number(text)
                 if (text == "NaN") text = ""
+                byte3 = Number(text)
             }
         }
-        Label { text: "."; anchors.verticalCenter: parent.verticalCenter }
+        Label { text: "."; anchors.bottom: parent.bottom }
         TextField {
             id: networkByte4
             labelVisible: false
             readOnly: !editable
-            font.pixelSize: fieldSize
+            width: implicitWidth > Theme.itemSizeSmall ? implicitWidth : Theme.itemSizeSmall
+            font.pixelSize: fontSize
             placeholderText: "0"
             inputMethodHints: Qt.ImhDigitsOnly
             EnterKey.enabled: acceptableInput
             EnterKey.iconSource: "image://theme/icon-m-enter-next"
             EnterKey.onClicked: {
+                networkMask.text = ""
                 calculateMask()
                 networkMask.focus = true
             }
@@ -144,8 +151,9 @@ Column {
                     text = Number(text.split(',')[0])
                     networkMask.focus = true
                 }
-                text = byte4 = Number(text)
+                text = text === "" ? "" : Number(text)
                 if (text == "NaN") text = ""
+                byte4 = Number(text)
             }
         }
         Label { text: "/"; anchors.verticalCenter: parent.verticalCenter }
@@ -153,7 +161,8 @@ Column {
             id: networkMask
             labelVisible: false
             readOnly: !editable
-            font.pixelSize: fieldSize
+            width: implicitWidth > Theme.itemSizeSmall ? implicitWidth : Theme.itemSizeSmall
+            font.pixelSize: fontSize
             placeholderText: "0"
             Connections {
                 target: column
@@ -163,8 +172,11 @@ Column {
             EnterKey.enabled: acceptableInput
             EnterKey.iconSource: acceptFunction != null ? "image://theme/icon-m-enter-accept" : "image://theme/icon-m-enter-close"
             EnterKey.onClicked: focus = false
-            validator: IntValidator { bottom: networkMaskSlider.minimumValue; top: networkMaskSlider.maximumValue }
-            onTextChanged: text = mask = Number(text)
+            validator: IntValidator { bottom: 0; top: 32 }
+            onTextChanged: {
+                text = text === "" ? "" : Number(text)
+                mask = Number(text)
+            }
             onFocusChanged: {
                 if (focus === true) {
                     panel.show()

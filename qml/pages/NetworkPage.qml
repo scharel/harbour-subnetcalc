@@ -53,7 +53,7 @@ Page {
             IPTextField {
                 id: ipField
                 anchors.horizontalCenter: parent.horizontalCenter
-                fieldSize: Theme.fontSizeLarge
+                fontSize: Theme.fontSizeLarge
                 acceptFunction: function() {
                     resultsReady = true
                 }
