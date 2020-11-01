@@ -6,6 +6,7 @@ import "../js/ipcalc.js" as IPcalc
 Page {
     id: page
     allowedOrientations: Orientation.PortraitMask
+    property bool startPage: true
 
     Component.onCompleted: {
         ipField.focus = true
@@ -73,7 +74,7 @@ Page {
                         width: parent.width
                         network: IPcalc.getNetwork(ipField.ipaddress) + "/" + ipField.mask
                     }
-                    onClicked: menu.open(detailBackground)
+                    onPressAndHold: menu.open(detailBackground)
                     ContextMenu {
                         id: menu
                         MenuItem {

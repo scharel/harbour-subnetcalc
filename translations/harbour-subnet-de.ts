@@ -142,13 +142,32 @@
     </message>
 </context>
 <context>
+    <name>NetworkRangeDialog</name>
+    <message>
+        <source>Select the range of networks to show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First network to show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last network to show</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SubnetsPage</name>
+    <message>
+        <source>Back to the calculator</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Network number</source>
+        <source>Subnets %1 to %2 out of %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -156,11 +175,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Back to the calculator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Subnets %1 to %2 out of %3</source>
+        <source>Network number</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

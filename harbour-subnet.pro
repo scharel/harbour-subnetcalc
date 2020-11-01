@@ -12,7 +12,8 @@
 # The name of your application
 TARGET = harbour-subnet
 
-CONFIG += sailfishapp
+CONFIG += sailfishapp \
+    qml_debug
 
 SOURCES += src/harbour-subnet.cpp
 
@@ -23,6 +24,7 @@ DISTFILES += qml/harbour-subnet.qml \
     qml/cover/CoverPage.qml \
     qml/pages/AboutPage.qml \
     qml/pages/NetworkPage.qml \
+    qml/pages/NetworkRangeDialog.qml \
     qml/pages/SubnetsPage.qml \
     rpm/harbour-subnet.changes.in \
     rpm/harbour-subnet.changes.run.in \
