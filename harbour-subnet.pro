@@ -25,6 +25,7 @@ DISTFILES += qml/harbour-subnet.qml \
     qml/pages/AboutPage.qml \
     qml/pages/NetworkPage.qml \
     qml/pages/NetworkRangeDialog.qml \
+    qml/pages/SubnetPage.qml \
     qml/pages/SubnetsPage.qml \
     rpm/harbour-subnet.changes.in \
     rpm/harbour-subnet.changes.run.in \

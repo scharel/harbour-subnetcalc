@@ -124,7 +124,7 @@ Page {
                         enabled: numSubnetsDetail.value > 1
                         text: qsTr("View Subnets")
                         anchors.horizontalCenter: parent.horizontalCenter
-                        onClicked: pageStack.push(Qt.resolvedUrl("SubnetsPage.qml"))
+                        onClicked: pageStack.push(Qt.resolvedUrl("SubnetPage.qml"))
                     }
                 }
             }

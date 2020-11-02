@@ -157,6 +157,13 @@
     </message>
 </context>
 <context>
+    <name>SubnetPage</name>
+    <message>
+        <source>to</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SubnetsPage</name>
     <message>
         <source>Back to the calculator</source>
